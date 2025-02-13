@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengujian Model AI</title>
+    <link rel="stylesheet" href="CSS/index.css">
+</head>
+<body>
+    <header>
+        <h1>🤖 Pengujian Model AI</h1>
+        <p>Bandingkan hasil dari berbagai model AI dengan cepat</p>
+    </header>
+
+    <main class="container">
+        <!-- Bagian Input -->
+        <section class="chat-section">
+            <div class="input-group">
+                <label for="model-select">🔍 Pilih Model AI:</label>
+                <select id="model-select">
+                    <option value="deepseek">DeepSeek</option>
+                    <option value="qwen">Qwen 2.5</option>
+                    <option value="openai-gpt">OpenAI</option>
+                    <option value="llama">LLaMA</option>
+                    <option value="gemini">Gemini</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <textarea id="question-input" placeholder="Tulis pertanyaan Anda di sini..."></textarea>
+            </div>
+
+            <div class="button-group">
+                <button id="send-btn">🚀 Kirim Pertanyaan</button>
+                <button id="reset-btn" class="reset">🗑️ Reset Riwayat</button>
+            </div>
+        </section>
+        
+        <!-- Bagian Hasil -->
+        <section class="results-section">
+            <h2>📌 Hasil Respons AI</h2>
+            <div id="response-timer"></div>
+            <div id="response-text" class="result-container">
+                <p class="info-text">❕ Jawaban AI akan muncul di sini...</p>
+            </div>
+        </section>
+
+        <!-- Tabel Histori -->
+        <section class="history-section">
+            <h2>📊 Riwayat Pertanyaan & Jawaban</h2>
+            <table id="history-table">
+                <thead>
+                    <tr>
+                        <th>❓ Pertanyaan</th>
+                        <th>🤖 Jawaban</th>
+                        <th>⏱️ Waktu Menjawab</th>
+                        <th>⏰ Jam Bertanya</th>
+                        <th>🤖 Jenis AI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data akan ditambahkan secara dinamis -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Pengujian AI | Dibuat dengan ❤️ oleh Admin</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

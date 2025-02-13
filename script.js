@@ -114,14 +114,14 @@ async function fetchResponseFromAI(model, question) {
         apiUrl = "http://localhost:11434/api/generate";
         requestBody = { model: modelMap[model], prompt: question, stream: false };
     } else if (model === "gemini") {
-        const GEMINI_API_KEY = "AIzaSyDSGUE71uCL2FrSBQDZDWKnh49HF3rSr_8";
+        const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"; // Jangan hardcode API key
         if (!GEMINI_API_KEY) {
             return "⚠️ API Key untuk Gemini tidak ditemukan.";
         }
         apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
         requestBody = { contents: [{ parts: [{ text: question }] }], generationConfig: { temperature: 0.7 } };
     } else if (model === "openai-gpt") {
-        const OPENAI_API_KEY = "YOUR_OPENAI_API_KEY";
+        const OPENAI_API_KEY = "YOUR_OPENAI_API_KEY"; // Jangan hardcode API key
         if (!OPENAI_API_KEY) {
             return "⚠️ API Key untuk OpenAI tidak ditemukan.";
         }
@@ -131,7 +131,17 @@ async function fetchResponseFromAI(model, question) {
     }
 
     try {
-        const response = await fetch(apiUrl, { method: "POST", headers: headers, body: JSON.stringify(requestBody) });
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // Timeout 15 detik
+
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(requestBody),
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId); // Hentikan timeout jika request berhasil
 
         if (!response.ok) {
             const errorText = await response.text();
@@ -149,6 +159,9 @@ async function fetchResponseFromAI(model, question) {
             return data.response || "❌ Jawaban kosong dari Ollama.";
         }
     } catch (error) {
+        if (error.name === "AbortError") {
+            return "❌ Permintaan timeout, coba lagi nanti.";
+        }
         console.error("❌ ERROR fetching AI response:", error);
         return `⚠️ Error: ${error.message}`;
     }

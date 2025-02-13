@@ -114,7 +114,7 @@ async function fetchResponseFromAI(model, question) {
         apiUrl = "http://localhost:11434/api/generate";
         requestBody = { model: modelMap[model], prompt: question, stream: false };
     } else if (model === "gemini") {
-        const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"; // Jangan hardcode API key
+        const GEMINI_API_KEY = "AIzaSyDSGUE71uCL2FrSBQDZDWKnh49HF3rSr_8"; // Jangan hardcode API key
         if (!GEMINI_API_KEY) {
             return "⚠️ API Key untuk Gemini tidak ditemukan.";
         }

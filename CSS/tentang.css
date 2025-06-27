@@ -1,0 +1,146 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  background-size: cover;
+  background-attachment: fixed;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  color: #ffc107;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card p,
+.card ul li {
+  color: #f1f1f1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.card ul {
+  padding-left: 1.25rem;
+}
+
+/* === CARD CTA === */
+.card.cta {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #0d6efd;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.card.cta:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* === Tombol CTA === */
+.cta-btn {
+  font-weight: 600;
+  font-size: 1rem;
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+  background-color: #0056b3;
+}
+
+/* === NAVBAR === */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar .logo {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #ffc107;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar .nav-links li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.navbar .nav-links li a.active,
+.navbar .nav-links li a:hover {
+  color: #ffc107;
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: #ccc;
+  font-size: 0.85rem;
+  margin-top: 2rem;
+}
+
+/* === RESPONSIF === */
+@media (max-width: 576px) {
+  .navbar .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cta-btn {
+    width: 100%;
+  }
+
+  .card h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* === OVERRIDE WARNA TEKS DI CARD CTA === */
+.card.cta h2,
+.card.cta p,
+.card.cta span,
+.card.cta a {
+  color: #000 !important;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "cobaaiyuk",
+  "version": "1.0.0",
+  "main": "firebaseConfig.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ersanputra3445/CobaAIYuk.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ersanputra3445/CobaAIYuk.github.io/issues"
+  },
+  "homepage": "https://github.com/ersanputra3445/CobaAIYuk.github.io#readme",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2"
+  }
+}

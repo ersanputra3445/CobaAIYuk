@@ -313,3 +313,45 @@ document.getElementById("batal-btn")?.addEventListener("click", () => {
 function normalizeString(str) {
     return str.toLowerCase().replace(/[^a-z0-9]/gi, '').trim();
 }
+
+
+document.getElementById("filter-btn")?.addEventListener("click", () => {
+  const selectedModel = document.getElementById("filter-model-select")?.value.toLowerCase().trim();
+  tableBody.innerHTML = "";
+
+  // Fungsi normalisasi model dari data (agar cocok dengan dropdown)
+  function normalizeModelName(model) {
+    const lower = model?.toLowerCase() || "";
+    if (lower.includes("openai") || lower.includes("gpt")) return "openai";
+    if (lower.includes("gemini")) return "gemini";
+    if (lower.includes("llama")) return "llama";
+    if (lower.includes("deepseek")) return "deepseek";
+    if (lower.includes("qwen")) return "qwen";
+    return "unknown";
+  }
+
+  let filteredData = [];
+
+  if (!selectedModel || selectedModel === "all") {
+    filteredData = chatHistory;
+  } else {
+    filteredData = chatHistory.filter(entry => {
+      const normalized = normalizeModelName(entry.model);
+      return normalized === selectedModel;
+    });
+  }
+
+  // Jika tidak ada hasil
+  if (filteredData.length === 0) {
+    const row = tableBody.insertRow();
+    const cell = row.insertCell();
+    cell.colSpan = 7;
+    cell.classList.add("text-center", "text-muted", "fw-semibold");
+    cell.textContent = "⚠️ Tidak ditemukan data dengan model tersebut.";
+  } else {
+    filteredData.forEach(entry => {
+      updateTable(entry.question, entry.response, entry.accuracy, entry.latency, entry.model, false);
+    });
+  }
+});
+

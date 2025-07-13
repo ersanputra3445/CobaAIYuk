@@ -316,32 +316,33 @@ function normalizeString(str) {
 
 
 document.getElementById("filter-btn")?.addEventListener("click", () => {
-  const selectedModel = document.getElementById("filter-model-select")?.value.toLowerCase().trim();
+  const selectedModel = document.getElementById("filter-model-select")?.value.toLowerCase();
+  const tableBody = document.getElementById("ai-response-table-body");
+
+  if (!tableBody) return console.error("❌ tableBody not found");
   tableBody.innerHTML = "";
 
-  // Fungsi normalisasi model dari data (agar cocok dengan dropdown)
+  console.log("✅ Filter model dipilih:", selectedModel);
+
+  // Fungsi normalisasi model
   function normalizeModelName(model) {
-    const lower = model?.toLowerCase() || "";
-    if (lower.includes("openai") || lower.includes("gpt")) return "openai";
-    if (lower.includes("gemini")) return "gemini";
-    if (lower.includes("llama")) return "llama";
-    if (lower.includes("deepseek")) return "deepseek";
-    if (lower.includes("qwen")) return "qwen";
+    const m = model?.toLowerCase() || "";
+    if (m.includes("openai") || m.includes("gpt")) return "openai";
+    if (m.includes("gemini")) return "gemini";
+    if (m.includes("llama")) return "llama";
+    if (m.includes("deepseek")) return "deepseek";
+    if (m.includes("qwen")) return "qwen";
     return "unknown";
   }
 
-  let filteredData = [];
+  // Filter
+  const filteredData = selectedModel === "all"
+    ? chatHistory
+    : chatHistory.filter(entry => normalizeModelName(entry.model) === selectedModel);
 
-  if (!selectedModel || selectedModel === "all") {
-    filteredData = chatHistory;
-  } else {
-    filteredData = chatHistory.filter(entry => {
-      const normalized = normalizeModelName(entry.model);
-      return normalized === selectedModel;
-    });
-  }
+  console.log("📦 Filtered result:", filteredData);
 
-  // Jika tidak ada hasil
+  // Tampilkan ke tabel
   if (filteredData.length === 0) {
     const row = tableBody.insertRow();
     const cell = row.insertCell();
@@ -354,4 +355,5 @@ document.getElementById("filter-btn")?.addEventListener("click", () => {
     });
   }
 });
+
 
